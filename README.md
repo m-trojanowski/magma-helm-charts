@@ -1,0 +1,1 @@
+# Chart repository for magma.
