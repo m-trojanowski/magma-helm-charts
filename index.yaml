@@ -56,6 +56,25 @@ entries:
   fbinternal-orc8r:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2021-10-25T10:50:38.448916085Z"
+    dependencies:
+    - name: orc8rlib
+      repository: file://../../../../orc8r/cloud/helm/orc8rlib
+      version: 0.1.2
+    description: A Helm chart for magma orchestrator's fbinternal module
+    digest: f9c353f14cf38c1ce006a1a46d193288bd58e67f4026cde43c583aec1aa1587a
+    keywords:
+    - magma
+    - or8cr
+    - fbinternal-orc8r
+    name: fbinternal-orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/fbinternal-orc8r-0.2.2/fbinternal-orc8r-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2021-10-25T10:16:55.371629475Z"
     dependencies:
     - name: orc8rlib
