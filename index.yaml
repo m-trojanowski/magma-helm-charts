@@ -57,6 +57,26 @@ entries:
     urls:
     - https://github.com/m-trojanowski/magma-helm-charts/releases/download/feg-orc8r-0.2.4/feg-orc8r-0.2.4.tgz
     version: 0.2.4
+  lte-orc8r:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2021-10-25T10:18:53.363570473Z"
+    dependencies:
+    - name: orc8rlib
+      repository: file://../../../../orc8r/cloud/helm/orc8rlib
+      version: 0.1.2
+    description: A Helm chart for magma orchestrator's lte module
+    digest: f8b8cc80102a8ae56f43d98668d06505be0eeee61d30bbb22d8a57a5a7c48a16
+    keywords:
+    - magma
+    - or8cr
+    - lte-orc8r
+    name: lte-orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/lte-orc8r-0.2.5/lte-orc8r-0.2.5.tgz
+    version: 0.2.5
   orc8rlib:
   - apiVersion: v2
     appVersion: 1.0.0
