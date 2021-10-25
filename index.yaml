@@ -129,4 +129,24 @@ entries:
     urls:
     - https://github.com/m-trojanowski/magma-helm-charts/releases/download/orc8rlib-0.1.2/orc8rlib-0.1.2.tgz
     version: 0.1.2
+  wifi-orc8r:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2021-10-25T10:25:31.787866191Z"
+    dependencies:
+    - name: orc8rlib
+      repository: file://../../../../orc8r/cloud/helm/orc8rlib
+      version: 0.1.2
+    description: A Helm chart for magma orchestrator's wifi module
+    digest: a09804d72d9ad9d00d566af3d7030d0882eaceb47d236b688eeda4f55539c705
+    keywords:
+    - magma
+    - or8cr
+    - wifi-orc8r
+    name: wifi-orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/wifi-orc8r-0.2.1/wifi-orc8r-0.2.1.tgz
+    version: 0.2.1
 generated: "2021-10-22T13:48:08.547097437Z"
