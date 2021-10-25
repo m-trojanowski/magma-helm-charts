@@ -173,6 +173,41 @@ entries:
   orc8r:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2021-10-25T11:01:01.752089942Z"
+    dependencies:
+    - condition: secrets.create
+      name: secrets
+      repository: ""
+      version: 0.1.10
+    - condition: metrics.enabled
+      name: metrics
+      repository: ""
+      version: 1.4.24
+    - condition: nms.enabled
+      name: nms
+      repository: ""
+      version: 0.1.11
+    - condition: logging.enabled
+      name: logging
+      repository: ""
+      version: 0.1.10
+    - name: orc8rlib
+      repository: file://../orc8rlib
+      version: 0.1.2
+    description: Helm chart for the Magma Orchestrator
+    digest: 3fb6c3b76fdb32741a66b8bb0497c52c722aa57a994a4171cf78630a9a3f1eea
+    home: https://www.magmacore.org
+    keywords:
+    - magma
+    - orc8r
+    name: orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/orc8r-1.5.26/orc8r-1.5.26.tgz
+    version: 1.5.26
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2021-10-25T10:22:23.636175583Z"
     dependencies:
     - condition: secrets.create
