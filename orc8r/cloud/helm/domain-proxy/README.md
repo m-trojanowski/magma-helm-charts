@@ -2,7 +2,7 @@
 Domain-proxy
 ===========
 
-A Helm chart for magma orchestrator's domain-proxy module.
+A Helm chart for magma orchestrator's domain proxy module.
 
 This Chart will deploy the following:
 
