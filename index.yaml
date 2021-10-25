@@ -1,5 +1,25 @@
 apiVersion: v1
 entries:
+  cwf-orc8r:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2021-10-25T10:49:16.351503088Z"
+    dependencies:
+    - name: orc8rlib
+      repository: file://../../../../orc8r/cloud/helm/orc8rlib
+      version: 0.1.2
+    description: A Helm chart for magma orchestrator's cwf module
+    digest: c9ad2b34c84a479aa9ee1e211b1f8913df46e0688378d8719c2c2f15cadf821d
+    keywords:
+    - magma
+    - or8cr
+    - cwf-orc8r
+    name: cwf-orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/cwf-orc8r-0.2.2/cwf-orc8r-0.2.2.tgz
+    version: 0.2.2
   domain-proxy:
   - apiVersion: v2
     appVersion: 0.1.0
