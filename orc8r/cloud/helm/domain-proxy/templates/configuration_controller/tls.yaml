@@ -1,5 +1,6 @@
 {{- if .Values.create -}}
 {{- $fullName := include "domain-proxy.fullname" . -}}
+{{- if .Values.configuration_controller.tlsConfig -}}
 {{- if (empty (lookup "v1" "Secret" .Release.Namespace "${fullName}-cc")) -}}
 apiVersion: v1
 kind: Secret
@@ -14,4 +15,5 @@ data:
   tls.key: |
 {{ (.Files.Get $pathkey) | b64enc | indent 4 }}
 {{- end -}}
+{{- end }}
 {{- end }}
