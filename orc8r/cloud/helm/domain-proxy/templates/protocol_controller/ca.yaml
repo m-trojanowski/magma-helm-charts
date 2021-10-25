@@ -1,6 +1,6 @@
 {{- if .Values.create -}}
 {{- $fullName := include "domain-proxy.fullname" . -}}
-{{- if .Values.protocol_controller.tlsConfig.paths.ca -}}
+{{- if .Values.protocol_controller.tlsConfig -}}
 {{- if (empty (lookup "v1" "Secret" .Release.Namespace "${fullName}-pc-ca")) -}}
 apiVersion: v1
 kind: Secret
