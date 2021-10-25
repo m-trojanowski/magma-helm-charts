@@ -95,6 +95,25 @@ entries:
   feg-orc8r:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2021-10-25T10:50:59.325345718Z"
+    dependencies:
+    - name: orc8rlib
+      repository: file://../../../../orc8r/cloud/helm/orc8rlib
+      version: 0.1.2
+    description: A Helm chart for magma orchestrator's feg module
+    digest: 07e201a41e4792a9b06753be7f4cf428d14d1858c19a8d2b73750604a37d7410
+    keywords:
+    - magma
+    - or8cr
+    - feg-orc8r
+    name: feg-orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/feg-orc8r-0.2.5/feg-orc8r-0.2.5.tgz
+    version: 0.2.5
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2021-10-25T10:18:10.662578048Z"
     dependencies:
     - name: orc8rlib
