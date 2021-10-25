@@ -45,10 +45,7 @@ spec:
         - name: {{ .Values.active_mode_controller.name }}
           securityContext:
             {{- toYaml .Values.active_mode_controller.securityContext | nindent 12 }}
-          image: >-
-            {{ .Values.active_mode_controller.image.repository -}}:
-            {{- .Values.active_mode_controller.image.tag | 
-            default .Chart.AppVersion }}
+          image: {{ .Values.active_mode_controller.image.repository -}}:{{- .Values.active_mode_controller.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.active_mode_controller.image.pullPolicy }}
           env:
             {{- range $key, $value := .Values.active_mode_controller.extraEnv }}

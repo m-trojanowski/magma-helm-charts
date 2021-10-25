@@ -30,10 +30,7 @@ spec:
         {{- toYaml .Values.configuration_controller.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Values.configuration_controller.name }}
-          image: >-
-            {{ .Values.configuration_controller.image.repository -}}:
-            {{- .Values.configuration_controller.image.tag | 
-            default .Chart.AppVersion  }}
+          image: {{ .Values.configuration_controller.image.repository -}}:{{- .Values.configuration_controller.image.tag | default .Chart.AppVersion  }}
           imagePullPolicy: {{ .Values.configuration_controller.image.pullPolicy }}
           env:
             {{- range $key, $value := .Values.configuration_controller.extraEnv }}
