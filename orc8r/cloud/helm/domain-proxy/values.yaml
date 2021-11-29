@@ -167,11 +167,12 @@ dp:
 
 
     # If paths are set chart will generate kubernetes Secret resources for ingress. Mutually exclusive with ingress.tls.
-    tlsConfig: {}
-      #paths:
-      #  cert: ""  # Client/Server TLS certificate path.
-      #  key: ""  # Client/Server TLS private key path.
-      #  ca: ""  # Certificate Authority certifcate chain path.
+    #tlsConfig: {}
+    tlsConfig:
+      paths:
+        cert: "cert"  # Client/Server TLS certificate path.
+        key: "key"  # Client/Server TLS private key path.
+        ca: "ca"  # Certificate Authority certifcate chain path.
 
     apiPrefix: "/sas/v1"  # Protocol controller URL API prefix.
 
