@@ -308,6 +308,41 @@ entries:
     urls:
     - https://github.com/m-trojanowski/magma-helm-charts/releases/download/orc8r-1.5.23/orc8r-1.5.23.tgz
     version: 1.5.23
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2021-11-29T14:56:48.137880502Z"
+    dependencies:
+    - condition: secrets.create
+      name: secrets
+      repository: ""
+      version: 0.1.10
+    - condition: metrics.enabled
+      name: metrics
+      repository: ""
+      version: 1.4.24
+    - condition: nms.enabled
+      name: nms
+      repository: ""
+      version: 0.1.11
+    - condition: logging.enabled
+      name: logging
+      repository: ""
+      version: 0.1.10
+    - name: orc8rlib
+      repository: file://../orc8rlib
+      version: 0.1.2
+    description: Helm chart for the Magma Orchestrator
+    digest: 4d002b80d23d01055199100b4e57b587535d6aec120f9ee545e06839754de5f0
+    home: https://www.magmacore.org
+    keywords:
+    - magma
+    - orc8r
+    name: orc8r
+    sources:
+    - https://github.com/magma/magma
+    urls:
+    - https://github.com/m-trojanowski/magma-helm-charts/releases/download/orc8r-1.5.23-private/orc8r-1.5.23-private.tgz
+    version: 1.5.23-private
   orc8rlib:
   - apiVersion: v2
     appVersion: 1.0.0
