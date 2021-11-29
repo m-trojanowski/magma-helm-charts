@@ -1,4 +1,4 @@
-{{- if and .Values.create .Values.protocol_controller.autoscaling.enabled .Values.protocol_controller.enabled }}
+{{- if and .Values.dp.create .Values.dp.protocol_controller.autoscaling.enabled .Values.dp.protocol_controller.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -10,19 +10,19 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "domain-proxy.protocol_controller.fullname" . }}
-  minReplicas: {{ .Values.protocol_controller.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.protocol_controller.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.dp.protocol_controller.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.dp.protocol_controller.autoscaling.maxReplicas }}
   metrics:
-    {{- if .Values.protocol_controller.autoscaling.targetCPUUtilizationPercentage }}
+    {{- if .Values.dp.protocol_controller.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.protocol_controller.autoscaling.targetCPUUtilizationPercentage }}
+        targetAverageUtilization: {{ .Values.dp.protocol_controller.autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
-    {{- if .Values.protocol_controller.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- if .Values.dp.protocol_controller.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.protocol_controller.autoscaling.targetMemoryUtilizationPercentage }}
+        targetAverageUtilization: {{ .Values.dp.protocol_controller.autoscaling.targetMemoryUtilizationPercentage }}
     {{- end }}
 {{- end }}

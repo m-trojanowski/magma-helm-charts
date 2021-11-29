@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "domain-proxy.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.dp.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -35,7 +35,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Configuration controller match labels
 */}}
 {{- define "domain-proxy.configuration_controller.matchLabels" -}}
-component: {{ .Values.configuration_controller.name | quote }}
+component: {{ .Values.dp.configuration_controller.name | quote }}
 {{ include "domain-proxy.common.matchLabels" . }}
 {{- end -}}
 
@@ -51,7 +51,7 @@ Configuration controller labels
 Active mode controller match labels
 */}}
 {{- define "domain-proxy.active_mode_controller.matchLabels" -}}
-component: {{ .Values.active_mode_controller.name | quote }}
+component: {{ .Values.dp.active_mode_controller.name | quote }}
 {{ include "domain-proxy.common.matchLabels" . }}
 {{- end -}}
 
@@ -67,7 +67,7 @@ Active mode controller labels
 Protocol controller match labels
 */}}
 {{- define "domain-proxy.protocol_controller.matchLabels" -}}
-component: {{ .Values.protocol_controller.name | quote }}
+component: {{ .Values.dp.protocol_controller.name | quote }}
 {{ include "domain-proxy.common.matchLabels" . }}
 {{- end -}}
 
@@ -83,7 +83,7 @@ Protocol controller labels
 Radio controller match labels
 */}}
 {{- define "domain-proxy.radio_controller.matchLabels" -}}
-component: {{ .Values.radio_controller.name | quote }}
+component: {{ .Values.dp.radio_controller.name | quote }}
 {{ include "domain-proxy.common.matchLabels" . }}
 {{- end -}}
 
@@ -107,10 +107,10 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 If release name contains chart name it will be used as a full name.
 */}}
 {{- define "domain-proxy.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- if .Values.dp.fullnameOverride }}
+{{- .Values.dp.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- $name := default .Chart.Name .Values.dp.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -126,14 +126,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 */}}
 
 {{- define "domain-proxy.configuration_controller.fullname" -}}
-{{- if .Values.configuration_controller.fullnameOverride -}}
-{{- .Values.configuration_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.dp.configuration_controller.fullnameOverride -}}
+{{- .Values.dp.configuration_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default .Chart.Name .Values.dp.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.configuration_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.dp.configuration_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.configuration_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.dp.configuration_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -144,14 +144,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 */}}
 
 {{- define "domain-proxy.protocol_controller.fullname" -}}
-{{- if .Values.protocol_controller.fullnameOverride -}}
-{{- .Values.protocol_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.dp.protocol_controller.fullnameOverride -}}
+{{- .Values.dp.protocol_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default .Chart.Name .Values.dp.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.protocol_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.dp.protocol_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.protocol_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.dp.protocol_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -162,14 +162,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 */}}
 
 {{- define "domain-proxy.radio_controller.fullname" -}}
-{{- if .Values.radio_controller.fullnameOverride -}}
-{{- .Values.radio_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.dp.radio_controller.fullnameOverride -}}
+{{- .Values.dp.radio_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default .Chart.Name .Values.dp.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.radio_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.dp.radio_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.radio_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.dp.radio_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -180,14 +180,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 */}}
 
 {{- define "domain-proxy.db_service.fullname" -}}
-{{- if .Values.db_service.fullnameOverride -}}
-{{- .Values.db_service.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.dp.db_service.fullnameOverride -}}
+{{- .Values.dp.db_service.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default .Chart.Name .Values.dp.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.db_service.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.dp.db_service.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.db_service.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.dp.db_service.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -198,14 +198,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 */}}
 
 {{- define "domain-proxy.active_mode_controller.fullname" -}}
-{{- if .Values.active_mode_controller.fullnameOverride -}}
-{{- .Values.active_mode_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.dp.active_mode_controller.fullnameOverride -}}
+{{- .Values.dp.active_mode_controller.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default .Chart.Name .Values.dp.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.active_mode_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.dp.active_mode_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.active_mode_controller.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.dp.active_mode_controller.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -249,10 +249,10 @@ Return the appropriate apiVersion for HTTPProxy.
 Create the name of the service account to use for configuration controller
 */}}
 {{- define "domain-proxy.configuration_controller.serviceAccountName" -}}
-{{- if .Values.configuration_controller.serviceAccount.create }}
-{{- default (include "domain-proxy.fullname" .) .Values.configuration_controller.serviceAccount.name }}
+{{- if .Values.dp.configuration_controller.serviceAccount.create }}
+{{- default (include "domain-proxy.fullname" .) .Values.dp.configuration_controller.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.configuration_controller.serviceAccount.name }}
+{{- default "default" .Values.dp.configuration_controller.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
@@ -260,10 +260,10 @@ Create the name of the service account to use for configuration controller
 Create the name of the service account to use for protocol controller
 */}}
 {{- define "domain-proxy.protocol_controller.serviceAccountName" -}}
-{{- if .Values.protocol_controller.serviceAccount.create }}
-{{- default (include "domain-proxy.fullname" .) .Values.protocol_controller.serviceAccount.name }}
+{{- if .Values.dp.protocol_controller.serviceAccount.create }}
+{{- default (include "domain-proxy.fullname" .) .Values.dp.protocol_controller.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.protocol_controller.serviceAccount.name }}
+{{- default "default" .Values.dp.protocol_controller.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
@@ -271,10 +271,10 @@ Create the name of the service account to use for protocol controller
 Create the name of the service account to use for radio controller
 */}}
 {{- define "domain-proxy.radio_controller.serviceAccountName" -}}
-{{- if .Values.radio_controller.serviceAccount.create }}
-{{- default (include "domain-proxy.fullname" .) .Values.radio_controller.serviceAccount.name }}
+{{- if .Values.dp.radio_controller.serviceAccount.create }}
+{{- default (include "domain-proxy.fullname" .) .Values.dp.radio_controller.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.radio_controller.serviceAccount.name }}
+{{- default "default" .Values.dp.radio_controller.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
@@ -282,10 +282,10 @@ Create the name of the service account to use for radio controller
 Create the name of the service account to use for db service
 */}}
 {{- define "domain-proxy.db_service.serviceAccountName" -}}
-{{- if .Values.db_service.serviceAccount.create }}
-{{- default (include "domain-proxy.fullname" .) .Values.db_service.serviceAccount.name }}
+{{- if .Values.dp.db_service.serviceAccount.create }}
+{{- default (include "domain-proxy.fullname" .) .Values.dp.db_service.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.db_service.serviceAccount.name }}
+{{- default "default" .Values.dp.db_service.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
@@ -293,10 +293,10 @@ Create the name of the service account to use for db service
 Create the name of the service account to use for active mode controller
 */}}
 {{- define "domain-proxy.active_mode_controller.serviceAccountName" -}}
-{{- if .Values.active_mode_controller.serviceAccount.create }}
-{{- default (include "domain-proxy.fullname" .) .Values.active_mode_controller.serviceAccount.name }}
+{{- if .Values.dp.active_mode_controller.serviceAccount.create }}
+{{- default (include "domain-proxy.fullname" .) .Values.dp.active_mode_controller.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.active_mode_controller.serviceAccount.name }}
+{{- default "default" .Values.dp.active_mode_controller.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

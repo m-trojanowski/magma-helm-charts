@@ -1,301 +1,302 @@
 ---
-create: true
-nameOverride: ""
-fullnameOverride: ""
-
-configuration_controller:
-
+dp:
+  create: true
   nameOverride: ""
   fullnameOverride: ""
-  enabled: true
-  name: configuration-controller
-  sasEndpointUrl: "https://fake-sas-service/v1.2"
 
-  database: {}
+  configuration_controller:
 
-  image:
-    repository: configuration-controller
-    pullPolicy: IfNotPresent
-    tag: ""
-
-  replicaCount: 1
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-
-  securityContext: {}
-
-  extraEnv: {}
-
-  service:
-    enable: true
-    port: 8080
-
-  tlsConfig:
-    paths:
-      cert: "certificates/configuration_controller/device_c.cert"
-      key: "certificates/configuration_controller/device_c.key"
-      ca: "certificates/configuration_controller/ca.cert"
-
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts: []
-    tls: []
-
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
-  readinessProbe: {}
-
-  livenessProbe: {}
-
-  autoscaling:
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: configuration-controller
+    sasEndpointUrl: "https://fake-sas-service/v1.2"
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    database: {}
 
-  nodeSelector: {}
+    image:
+      repository: configuration-controller
+      pullPolicy: IfNotPresent
+      tag: ""
 
-  tolerations: []
+    replicaCount: 1
 
-  affinity: {}
+    imagePullSecrets: []
 
-protocol_controller:
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: protocol-controller
+    podAnnotations: {}
 
-  image:
-    repository: protocol-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    podSecurityContext: {}
 
-  replicaCount: 1
+    securityContext: {}
 
-  imagePullSecrets: []
+    extraEnv: {}
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    service:
+      enable: true
+      port: 8080
 
-  podAnnotations: {}
+    tlsConfig:
+      paths:
+        cert: "certificates/configuration_controller/device_c.cert"
+        key: "certificates/configuration_controller/device_c.key"
+        ca: "certificates/configuration_controller/ca.cert"
 
-  podSecurityContext: {}
+    ingress:
+      enabled: false
+      annotations: {}
+      hosts: []
+      tls: []
 
-  securityContext: {}
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-  extraEnv: {}
+    readinessProbe: {}
 
-  service:
-    enable: true
-    port: 8080
+    livenessProbe: {}
 
-  tlsConfig:
-    paths:
-      cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
-      key: "certificates/protocol_controller/domain_proxy_server.key"
-      ca: "certificates/protocol_controller/ca.cert"
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
 
-  apiPrefix: "/sas/v1"
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts: []
-    tls: []
+    nodeSelector: {}
 
-  httpproxy:
+    tolerations: []
+
+    affinity: {}
+
+  protocol_controller:
+
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    annotations: {}
-    virtualhost:
-      fqdn: domain-proxy
-      path: "/sas/v1"
-      tls: {}
-      tls: {}
+    name: protocol-controller
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    image:
+      repository: protocol-controller
+      tag: ""
+      pullPolicy: IfNotPresent
 
-  readinessProbe: {}
+    replicaCount: 1
 
-  livenessProbe: {}
+    imagePullSecrets: []
 
-  autoscaling:
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
+
+    podAnnotations: {}
+
+    podSecurityContext: {}
+
+    securityContext: {}
+
+    extraEnv: {}
+
+    service:
+      enable: true
+      port: 8080
+
+    tlsConfig:
+      paths:
+        cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
+        key: "certificates/protocol_controller/domain_proxy_server.key"
+        ca: "certificates/protocol_controller/ca.cert"
+
+    apiPrefix: "/sas/v1"
+
+    ingress:
+      enabled: false
+      annotations: {}
+      hosts: []
+      tls: []
+
+    httpproxy:
+      enabled: true
+      annotations: {}
+      virtualhost:
+        fqdn: domain-proxy
+        path: "/sas/v1"
+        tls: {}
+        tls: {}
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    readinessProbe: {}
+
+    livenessProbe: {}
+
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+  radio_controller:
+
+    database: {}
+
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: radio-controller
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    image:
+      repository: radio-controller
+      tag: ""
+      pullPolicy: IfNotPresent
 
-  nodeSelector: {}
+    replicaCount: 1
 
-  tolerations: []
+    imagePullSecrets: []
 
-  affinity: {}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-radio_controller:
+    podAnnotations: {}
 
-  database: {}
+    podSecurityContext: {}
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: radio-controller
+    securityContext: {}
 
-  image:
-    repository: radio-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    extraEnv: {}
 
-  replicaCount: 1
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-  imagePullSecrets: []
+    readinessProbe: {}
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    livenessProbe: {}
 
-  podAnnotations: {}
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
 
-  podSecurityContext: {}
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  securityContext: {}
+    nodeSelector: {}
 
-  extraEnv: {}
+    tolerations: []
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    affinity: {}
 
-  readinessProbe: {}
+  active_mode_controller:
 
-  livenessProbe: {}
-
-  autoscaling:
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: active-mode-controller
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    image:
+      repository: active-mode-controller
+      tag: "" 
+      pullPolicy: IfNotPresent
 
-  nodeSelector: {}
+    replicaCount: 1
 
-  tolerations: []
+    imagePullSecrets: []
 
-  affinity: {}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-active_mode_controller:
+    podAnnotations: {}
+    podSecurityContext: {}
+    securityContext: {}
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: active-mode-controller
+    extraEnv: {}
+    resources: {}
+    readinessProbe: {}
+    livenessProbe: {}
 
-  image:
-    repository: active-mode-controller
-    tag: "" 
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
-
-  podAnnotations: {}
-  podSecurityContext: {}
-  securityContext: {}
-
-  extraEnv: {}
-  resources: {}
-  readinessProbe: {}
-  livenessProbe: {}
-
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-  
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
     
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+      
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
 
-db_service:
+  db_service:
 
-  database: {}
+    database: {}
 
-  enabled: true
-  nameOverride: ""
-  fullnameOverride: ""
-  name: db-service
+    enabled: true
+    nameOverride: ""
+    fullnameOverride: ""
+    name: db-service
 
-  image:
-    repository: db-service
-    pullPolicy: IfNotPresent
-    tag: ""
+    image:
+      repository: db-service
+      pullPolicy: IfNotPresent
+      tag: ""
 
-  extraEnv: {}
+    extraEnv: {}
 
-  imagePullSecrets: []
+    imagePullSecrets: []
 
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: ""
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: false
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""

@@ -11,8 +11,8 @@
 # limitations under the License.
 */}}
 
-{{- if and .Values.create .Values.active_mode_controller.enabled -}}
-{{- if .Values.active_mode_controller.autoscaling.enabled }}
+{{- if and .Values.dp.create .Values.dp.active_mode_controller.enabled -}}
+{{- if .Values.dp.active_mode_controller.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -24,20 +24,20 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "domain-proxy.active_mode_controller.fullname" . }}
-  minReplicas: {{ .Values.active_mode_controller.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.active_mode_controller.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.dp.active_mode_controller.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.dp.active_mode_controller.autoscaling.maxReplicas }}
   metrics:
-    {{- if .Values.active_mode_controller.autoscaling.targetCPUUtilizationPercentage }}
+    {{- if .Values.dp.active_mode_controller.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.active_mode_controller.autoscaling.targetCPUUtilizationPercentage }}
+        targetAverageUtilization: {{ .Values.dp.active_mode_controller.autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
-    {{- if .Values.active_mode_controller.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- if .Values.dp.active_mode_controller.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.active_mode_controller.autoscaling.targetMemoryUtilizationPercentage }}
+        targetAverageUtilization: {{ .Values.dp.active_mode_controller.autoscaling.targetMemoryUtilizationPercentage }}
     {{- end }}
 {{- end }}
 {{- end }}

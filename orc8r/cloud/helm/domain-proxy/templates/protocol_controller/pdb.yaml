@@ -1,4 +1,4 @@
-{{- if and .Values.create .Values.protocol_controller.enabled .Values.protocol_controller.podDisruptionBudget.enabled -}}
+{{- if and .Values.dp.create .Values.dp.protocol_controller.enabled .Values.dp.protocol_controller.podDisruptionBudget.enabled -}}
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
@@ -6,10 +6,10 @@ metadata:
   labels:
     {{- include "domain-proxy.protocol_controller.labels" . | nindent 4 }}
 spec:
-  {{- with .Values.protocol_controller.podDisruptionBudget.minAvailable }}
+  {{- with .Values.dp.protocol_controller.podDisruptionBudget.minAvailable }}
   minAvailable: {{ . }}
   {{- end }}
-  {{- with .Values.protocol_controller.podDisruptionBudget.maxUnavailable }}
+  {{- with .Values.dp.protocol_controller.podDisruptionBudget.maxUnavailable }}
   maxUnavailable: {{ . }}
   {{- end }}
   selector:

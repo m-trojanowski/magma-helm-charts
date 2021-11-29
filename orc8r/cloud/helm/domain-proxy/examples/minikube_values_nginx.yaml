@@ -1,285 +1,286 @@
 ---
-create: true
-nameOverride: ""
-fullnameOverride: ""
-
-configuration_controller:
-
+dp:
+  create: true
   nameOverride: ""
   fullnameOverride: ""
-  enabled: true
-  name: configuration-controller
-  sasEndpointUrl: "https://fake-sas-service/v1.2"
 
-  image:
-    repository: configuration-controller
-    pullPolicy: IfNotPresent
-    tag: ""
+  configuration_controller:
 
-  replicaCount: 1
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-
-  securityContext: {}
-
-  service:
-    enable: true
-    port: 8080
-
-  tlsConfig:
-    paths:
-      cert: "certificates/configuration_controller/device_c.cert"
-      key: "certificates/configuration_controller/device_c.key"
-      ca: "certificates/configuration_controller/ca.cert"
-
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts: []
-    tls: []
-
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
-  readinessProbe: {}
-
-  livenessProbe: {}
-
-  autoscaling:
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: configuration-controller
+    sasEndpointUrl: "https://fake-sas-service/v1.2"
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    image:
+      repository: configuration-controller
+      pullPolicy: IfNotPresent
+      tag: ""
 
-  nodeSelector: {}
+    replicaCount: 1
 
-  tolerations: []
+    imagePullSecrets: []
 
-  affinity: {}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-protocol_controller:
+    podAnnotations: {}
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: protocol-controller
+    podSecurityContext: {}
 
-  image:
-    repository: protocol-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    securityContext: {}
 
-  replicaCount: 1
+    service:
+      enable: true
+      port: 8080
 
-  imagePullSecrets: []
+    tlsConfig:
+      paths:
+        cert: "certificates/configuration_controller/device_c.cert"
+        key: "certificates/configuration_controller/device_c.key"
+        ca: "certificates/configuration_controller/ca.cert"
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    ingress:
+      enabled: false
+      annotations: {}
+      hosts: []
+      tls: []
 
-  podAnnotations: {}
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-  podSecurityContext: {}
+    readinessProbe: {}
 
-  securityContext: {}
+    livenessProbe: {}
 
-  service:
-    enable: true
-    port: 8080
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
 
-  tlsConfig:
-    paths:
-      cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
-      key: "certificates/protocol_controller/domain_proxy_server.key"
-      ca: "certificates/protocol_controller/ca.cert"
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  apiPrefix: "/sas/v1"
+    nodeSelector: {}
 
-  ingress:
+    tolerations: []
+
+    affinity: {}
+
+  protocol_controller:
+
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    annotations:
-      nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-      nginx.ingress.kubernetes.io/default-backend: "domain-proxy-protocol-controller"
-      kubernetes.io/ingress.class: "nginx"
-    hosts:
-      - host: domain-proxy
-        paths:
-          - path: /sas/v1
-            pathType: ImplementationSpecific
+    name: protocol-controller
 
-  httpproxy:
-    enabled: false
-    annotations: {}
-    virtualhost: {}
+    image:
+      repository: protocol-controller
+      tag: ""
+      pullPolicy: IfNotPresent
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    replicaCount: 1
 
-  readinessProbe: {}
+    imagePullSecrets: []
 
-  livenessProbe: {}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  autoscaling:
+    podAnnotations: {}
+
+    podSecurityContext: {}
+
+    securityContext: {}
+
+    service:
+      enable: true
+      port: 8080
+
+    tlsConfig:
+      paths:
+        cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
+        key: "certificates/protocol_controller/domain_proxy_server.key"
+        ca: "certificates/protocol_controller/ca.cert"
+
+    apiPrefix: "/sas/v1"
+
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+        nginx.ingress.kubernetes.io/default-backend: "domain-proxy-protocol-controller"
+        kubernetes.io/ingress.class: "nginx"
+      hosts:
+        - host: domain-proxy
+          paths:
+            - path: /sas/v1
+              pathType: ImplementationSpecific
+
+    httpproxy:
+      enabled: false
+      annotations: {}
+      virtualhost: {}
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    readinessProbe: {}
+
+    livenessProbe: {}
+
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+  radio_controller:
+
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: radio-controller
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
-  nodeSelector: {}
+    image:
+      repository: radio-controller
+      tag: ""
+      pullPolicy: IfNotPresent
 
-  tolerations: []
+    replicaCount: 1
 
-  affinity: {}
+    imagePullSecrets: []
 
-radio_controller:
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: radio-controller
+    podAnnotations: {}
 
-  image:
-    repository: radio-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    podSecurityContext: {}
 
-  replicaCount: 1
+    securityContext: {}
 
-  imagePullSecrets: []
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    readinessProbe: {}
 
-  podAnnotations: {}
+    livenessProbe: {}
 
-  podSecurityContext: {}
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
 
-  securityContext: {}
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+    nodeSelector: {}
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    tolerations: []
 
-  readinessProbe: {}
+    affinity: {}
 
-  livenessProbe: {}
+  active_mode_controller:
 
-  autoscaling:
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+    name: active-mode-controller
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
-  nodeSelector: {}
+    image:
+      repository: active-mode-controller
+      tag: ""
+      pullPolicy: IfNotPresent
 
-  tolerations: []
+    replicaCount: 1
 
-  affinity: {}
+    imagePullSecrets: []
 
-active_mode_controller:
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: active-mode-controller
+    podAnnotations: {}
+    podSecurityContext: {}
+    securityContext: {}
+    resources: {}
+    readinessProbe: {}
+    livenessProbe: {}
 
-  image:
-    repository: active-mode-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
 
-  replicaCount: 1
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  imagePullSecrets: []
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+  db_service:
 
-  podAnnotations: {}
-  podSecurityContext: {}
-  securityContext: {}
-  resources: {}
-  readinessProbe: {}
-  livenessProbe: {}
+    enabled: true
+    nameOverride: ""
+    fullnameOverride: ""
+    name: db-service
 
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
+    image:
+      repository: db-service
+      pullPolicy: IfNotPresent
+      tag: ""
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    imagePullSecrets: []
 
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-
-db_service:
-
-  enabled: true
-  nameOverride: ""
-  fullnameOverride: ""
-  name: db-service
-
-  image:
-    repository: db-service
-    pullPolicy: IfNotPresent
-    tag: ""
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: ""
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: false
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""

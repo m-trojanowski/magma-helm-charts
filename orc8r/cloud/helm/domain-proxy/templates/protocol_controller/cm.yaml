@@ -1,5 +1,5 @@
-{{- if .Values.create -}}
-{{- if .Values.protocol_controller.enabled -}}
+{{- if .Values.dp.create -}}
+{{- if .Values.dp.protocol_controller.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,8 +8,8 @@ metadata:
   name: {{ include "domain-proxy.protocol_controller.fullname" . }}
 {{ include "domain-proxy.namespace" . | indent 2 }}
 data:
-{{- if .Values.protocol_controller.apiPrefix }}
-  API_PREFIX: {{ .Values.protocol_controller.apiPrefix }}
+{{- if .Values.dp.protocol_controller.apiPrefix }}
+  API_PREFIX: {{ .Values.dp.protocol_controller.apiPrefix }}
 {{- end }}
   GRPC_SERVICE: {{ include "domain-proxy.radio_controller.fullname" . }}
 {{- end }}

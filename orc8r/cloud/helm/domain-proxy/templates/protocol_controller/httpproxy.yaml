@@ -1,6 +1,6 @@
-{{- if and .Values.create .Values.protocol_controller.httpproxy.enabled -}}
+{{- if and .Values.dp.create .Values.dp.protocol_controller.httpproxy.enabled -}}
 {{- $fullName := include "domain-proxy.protocol_controller.fullname" . -}}
-{{- $svcPort := .Values.protocol_controller.service.port -}}
+{{- $svcPort := .Values.dp.protocol_controller.service.port -}}
 {{- $caSecret := printf "%s/%s-pc-ca" .Release.Namespace (include "domain-proxy.fullname" .) -}}
 {{- $tlsSecret := printf "%s-pc" (include "domain-proxy.fullname" .) -}}
 apiVersion: {{ template "httpproxy.apiVersion" . }}
@@ -9,24 +9,24 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "domain-proxy.protocol_controller.labels" . | nindent 4 }}
-  {{- with .Values.protocol_controller.ingress.annotations }}
+  {{- with .Values.dp.protocol_controller.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   virtualhost:
-    fqdn: {{ .Values.protocol_controller.httpproxy.virtualhost.fqdn | quote }}
+    fqdn: {{ .Values.dp.protocol_controller.httpproxy.virtualhost.fqdn | quote }}
     tls:
-      secretName: {{ default $tlsSecret .Values.protocol_controller.httpproxy.virtualhost.tls.secretName }}
+      secretName: {{ default $tlsSecret .Values.dp.protocol_controller.httpproxy.virtualhost.tls.secretName }}
       clientValidation:
-      {{- if .Values.protocol_controller.tlsConfig.paths.ca }}
+      {{- if .Values.dp.protocol_controller.tlsConfig.paths.ca }}
         caSecret: {{ $caSecret }}
       {{ else }}
-        caSecret: {{ .Values.protocol_controller.httpproxy.virtualhost.tls.caSecret }}
+        caSecret: {{ .Values.dp.protocol_controller.httpproxy.virtualhost.tls.caSecret }}
       {{- end }}
   routes:
     - conditions:
-        - prefix: {{ .Values.protocol_controller.httpproxy.virtualhost.path }}
+        - prefix: {{ .Values.dp.protocol_controller.httpproxy.virtualhost.path }}
       services:
         - name: {{ $fullName }}
           port: {{ $svcPort }}

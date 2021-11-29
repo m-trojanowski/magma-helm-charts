@@ -1,6 +1,5 @@
-{{- if .Values.create -}}
+{{- if .Values.dp.create -}}
 {{- $fullName := include "domain-proxy.fullname" . -}}
-{{- if .Values.configuration_controller.tlsConfig -}}
 {{- if (empty (lookup "v1" "Secret" .Release.Namespace "${fullName}-cc")) -}}
 apiVersion: v1
 kind: Secret
@@ -8,12 +7,11 @@ metadata:
   name: {{ $fullName }}-cc
 type: kubernetes.io/tls
 data:
-{{- $pathcrt := printf "%s" .Values.configuration_controller.tlsConfig.paths.cert }}
-{{- $pathkey := printf "%s" .Values.configuration_controller.tlsConfig.paths.key }}
+{{- $pathcrt := printf "%s" .Values.dp.configuration_controller.tlsConfig.paths.cert }}
+{{- $pathkey := printf "%s" .Values.dp.configuration_controller.tlsConfig.paths.key }}
   tls.crt: |
 {{ (.Files.Get $pathcrt) | b64enc | indent 4 }}
   tls.key: |
 {{ (.Files.Get $pathkey) | b64enc | indent 4 }}
 {{- end -}}
-{{- end }}
 {{- end }}

@@ -1,4 +1,4 @@
-{{- if and .Values.create .Values.protocol_controller.service.enable -}}
+{{- if and .Values.dp.create .Values.dp.protocol_controller.service.enable -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,7 +7,7 @@ metadata:
     {{- include "domain-proxy.protocol_controller.labels" . | nindent 4 }}
 spec:
   ports:
-    - port: {{ .Values.protocol_controller.service.port }}
+    - port: {{ .Values.dp.protocol_controller.service.port }}
       targetPort: 8080
       protocol: TCP
       name: http

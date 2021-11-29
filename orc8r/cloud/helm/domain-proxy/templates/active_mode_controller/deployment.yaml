@@ -11,7 +11,7 @@
 # limitations under the License.
 */}}
 
-{{- if and .Values.create .Values.active_mode_controller.enabled -}}
+{{- if and .Values.dp.create .Values.dp.active_mode_controller.enabled -}}
 apiVersion: {{ template "domain-proxy.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -19,61 +19,61 @@ metadata:
   labels:
     {{- include "domain-proxy.active_mode_controller.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.active_mode_controller.autoscaling.enabled }}
-  replicas: {{ .Values.active_mode_controller.replicaCount }}
+  {{- if not .Values.dp.active_mode_controller.autoscaling.enabled }}
+  replicas: {{ .Values.dp.active_mode_controller.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "domain-proxy.active_mode_controller.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.active_mode_controller.podAnnotations }}
+      {{- with .Values.dp.active_mode_controller.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "domain-proxy.active_mode_controller.labels" . | nindent 8 }}
     spec:
-      {{- with .Values.active_mode_controller.imagePullSecrets }}
+      {{- with .Values.dp.active_mode_controller.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "domain-proxy.active_mode_controller.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.active_mode_controller.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.dp.active_mode_controller.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Values.active_mode_controller.name }}
+        - name: {{ .Values.dp.active_mode_controller.name }}
           securityContext:
-            {{- toYaml .Values.active_mode_controller.securityContext | nindent 12 }}
-          image: {{ .Values.active_mode_controller.image.repository -}}:{{- .Values.active_mode_controller.image.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.active_mode_controller.image.pullPolicy }}
+            {{- toYaml .Values.dp.active_mode_controller.securityContext | nindent 12 }}
+          image: {{ .Values.dp.active_mode_controller.image.repository -}}:{{- .Values.dp.active_mode_controller.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.dp.active_mode_controller.image.pullPolicy }}
           env:
-            {{- range $key, $value := .Values.active_mode_controller.extraEnv }}
+            {{- range $key, $value := .Values.dp.active_mode_controller.extraEnv }}
             - name: {{ $key }}
               value: {{ $value }}
             {{- end }}
           envFrom:
           - configMapRef:
               name: {{ include "domain-proxy.configuration_controller.fullname" . }}-common
-          {{- if .Values.active_mode_controller.livenessProbe }}
+          {{- if .Values.dp.active_mode_controller.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.active_mode_controller.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.dp.active_mode_controller.livenessProbe | nindent 12 }}
           {{- end }}
-          {{- if .Values.active_mode_controller.readinessProbe }}
+          {{- if .Values.dp.active_mode_controller.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.active_mode_controller.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.dp.active_mode_controller.readinessProbe | nindent 12 }}
           {{- end }}
           resources:
-            {{- toYaml .Values.active_mode_controller.resources | nindent 12 }}
-      {{- with .Values.active_mode_controller.nodeSelector }}
+            {{- toYaml .Values.dp.active_mode_controller.resources | nindent 12 }}
+      {{- with .Values.dp.active_mode_controller.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.active_mode_controller.affinity }}
+      {{- with .Values.dp.active_mode_controller.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.active_mode_controller.tolerations }}
+      {{- with .Values.dp.active_mode_controller.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

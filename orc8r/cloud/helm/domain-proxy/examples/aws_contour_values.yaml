@@ -1,283 +1,284 @@
 ---
-create: true
-nameOverride: ""
-fullnameOverride: ""
-
-configuration_controller:
-
+dp:
+  create: true
   nameOverride: ""
   fullnameOverride: ""
-  enabled: true
-  name: configuration-controller
 
-  sasEndpointUrl: "https://fake-sas-service/v1.2"
+  configuration_controller:
 
-  image:
-    repository: domainproxyfw1/configuration-controller
-    pullPolicy: IfNotPresent
-    tag: "latest"
-
-  replicaCount: 1
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-
-  securityContext: {}
-
-  service:
-    enable: true
-    port: 8080
-
-  tlsConfig:
-    paths:
-      cert: "certificates/configuration_controller/device_c.cert"
-      key: "certificates/configuration_controller/device_c.key"
-      ca: "certificates/configuration_controller/ca.cert"
-
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts: []
-    tls: []
-
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
-  readinessProbe: {}
-
-  livenessProbe: {}
-
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
-
-protocol_controller:
-
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: protocol-controller
-
-  image:
-    repository: domainproxyfw1/protocol-controller
-    tag: "latest"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  imagePullSecrets: []
-
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-
-  securityContext: {}
-
-  service:
-    enable: true
-    port: 8080
-
-  tlsConfig:
-    paths:
-      cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
-      key: "certificates/protocol_controller/domain_proxy_server.key"
-      ca: "certificates/protocol_controller/ca.cert"
-
-  apiPrefix: "/sas/v1"
-
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts: []
-    tls: []
-
-  httpproxy:
+    nameOverride: ""
+    fullnameOverride: ""
     enabled: true
-    annotations: {}
-    virtualhost:
-      fqdn: domain-proxy
-      path: /sas
-      tls:
-        secretName: domain-proxy-pc
-        caSecret: domain-proxy-pc-ca
+    name: configuration-controller
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    sasEndpointUrl: "https://fake-sas-service/v1.2"
 
-  readinessProbe: {}
+    image:
+      repository: domainproxyfw1/configuration-controller
+      pullPolicy: IfNotPresent
+      tag: "latest"
 
-  livenessProbe: {}
+    replicaCount: 1
 
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
+    imagePullSecrets: []
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  nodeSelector: {}
+    podAnnotations: {}
 
-  tolerations: []
+    podSecurityContext: {}
 
-  affinity: {}
+    securityContext: {}
 
-radio_controller:
+    service:
+      enable: true
+      port: 8080
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: radio-controller
+    tlsConfig:
+      paths:
+        cert: "certificates/configuration_controller/device_c.cert"
+        key: "certificates/configuration_controller/device_c.key"
+        ca: "certificates/configuration_controller/ca.cert"
 
-  image:
-    repository: domainproxyfw1/radio-controller
-    tag: "latest"
-    pullPolicy: IfNotPresent
+    ingress:
+      enabled: false
+      annotations: {}
+      hosts: []
+      tls: []
 
-  replicaCount: 1
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-  imagePullSecrets: []
+    readinessProbe: {}
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    livenessProbe: {}
 
-  podAnnotations: {}
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
 
-  podSecurityContext: {}
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  securityContext: {}
+    nodeSelector: {}
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    tolerations: []
 
-  readinessProbe: {}
+    affinity: {}
 
-  livenessProbe: {}
+  protocol_controller:
 
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
+    nameOverride: ""
+    fullnameOverride: ""
+    enabled: true
+    name: protocol-controller
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
-  nodeSelector: {}
+    image:
+      repository: domainproxyfw1/protocol-controller
+      tag: "latest"
+      pullPolicy: IfNotPresent
 
-  tolerations: []
+    replicaCount: 1
 
-  affinity: {}
+    imagePullSecrets: []
 
-active_mode_controller:
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-  nameOverride: ""
-  fullnameOverride: ""
-  enabled: true
-  name: active-mode-controller
+    podAnnotations: {}
 
-  image:
-    repository: active-mode-controller
-    tag: ""
-    pullPolicy: IfNotPresent
+    podSecurityContext: {}
 
-  replicaCount: 1
+    securityContext: {}
 
-  imagePullSecrets: []
+    service:
+      enable: true
+      port: 8080
 
-  serviceAccount:
-    create: false
-    annotations: {}
-    name: ""
+    tlsConfig:
+      paths:
+        cert: "certificates/protocol_controller/domain_proxy_bundle.cert"
+        key: "certificates/protocol_controller/domain_proxy_server.key"
+        ca: "certificates/protocol_controller/ca.cert"
 
-  podAnnotations: {}
-  podSecurityContext: {}
-  securityContext: {}
-  resources: {}
-  readinessProbe: {}
-  livenessProbe: {}
+    apiPrefix: "/sas/v1"
 
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
+    ingress:
+      enabled: false
+      annotations: {}
+      hosts: []
+      tls: []
 
-  podDisruptionBudget:
-    enabled: false
-    minAvailable: 1
-    maxUnavailable: ""
+    httpproxy:
+      enabled: true
+      annotations: {}
+      virtualhost:
+        fqdn: domain-proxy
+        path: /sas
+        tls:
+          secretName: domain-proxy-pc
+          caSecret: domain-proxy-pc-ca
 
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-db_service:
+    readinessProbe: {}
 
-  enabled: true
-  nameOverride: ""
-  fullnameOverride: ""
-  name: db-service
+    livenessProbe: {}
 
-  image:
-    repository: domainproxyfw1/db-service
-    pullPolicy: IfNotPresent
-    tag: "latest"
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
 
-  imagePullSecrets: []
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
 
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: ""
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+  radio_controller:
+
+    nameOverride: ""
+    fullnameOverride: ""
+    enabled: true
+    name: radio-controller
+
+    image:
+      repository: domainproxyfw1/radio-controller
+      tag: "latest"
+      pullPolicy: IfNotPresent
+
+    replicaCount: 1
+
+    imagePullSecrets: []
+
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
+
+    podAnnotations: {}
+
+    podSecurityContext: {}
+
+    securityContext: {}
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    readinessProbe: {}
+
+    livenessProbe: {}
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+  active_mode_controller:
+
+    nameOverride: ""
+    fullnameOverride: ""
+    enabled: true
+    name: active-mode-controller
+
+    image:
+      repository: active-mode-controller
+      tag: ""
+      pullPolicy: IfNotPresent
+
+    replicaCount: 1
+
+    imagePullSecrets: []
+
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
+
+    podAnnotations: {}
+    podSecurityContext: {}
+    securityContext: {}
+    resources: {}
+    readinessProbe: {}
+    livenessProbe: {}
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+      maxUnavailable: ""
+
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
+
+  db_service:
+
+    enabled: true
+    nameOverride: ""
+    fullnameOverride: ""
+    name: db-service
+
+    image:
+      repository: domainproxyfw1/db-service
+      pullPolicy: IfNotPresent
+      tag: "latest"
+
+    imagePullSecrets: []
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: false
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
