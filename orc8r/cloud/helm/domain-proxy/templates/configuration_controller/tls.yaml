@@ -1,7 +1,7 @@
 {{- if .Values.dp.create -}}
 {{- $fullName := include "domain-proxy.fullname" . -}}
-{{- $secret := lookup "v1" "Secret" .Release.Namespace "${fullName}-cc" -}}
-{{- if not $secret -}}
+{{- $secret := printf "%s-%s" $fullName "cc" -}}
+{{- if not (lookup "v1" "Secret" .Release.Namespace $secret) -}}
 apiVersion: v1
 kind: Secret
 metadata:
